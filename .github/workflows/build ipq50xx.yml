@@ -11,8 +11,8 @@ env:
   CONFIG_FILE: configs/ipq50xx-4.4.config
   DIY_SCRIPT: diy-script.sh
   CACHE_TOOLCHAIN: false
-  UPLOAD_BIN_DIR: false
-  FIRMWARE_RELEASE: true
+  UPLOAD_BIN_DIR: true
+  FIRMWARE_RELEASE: false
   FIRMWARE_TAG: IPQ50XX-4.4-QSDK
   TZ: Asia/Shanghai
 
@@ -100,49 +100,12 @@ jobs:
         git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
         ./scripts/feeds install -a
 
-    - name: Upgrade some network software version
-      run: |
-        cd $OPENWRT_PATH
-
-        rm -rf feeds/packages/net/natmap
-        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
-        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages/net/natmap/
-        rm -rf cdn.jsdelivr.net
-        find feeds/packages/net/natmap -name index.html -exec rm {} \;
-
-        rm -rf feeds/packages/net/smartdns
-        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/smartdns/
-        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/smartdns feeds/packages/net/smartdns/
-        rm -rf cdn.jsdelivr.net
-        find feeds/packages/net/smartdns -name index.html -exec rm {} \;
-
-        rm -rf feeds/packages/net/ddns-go
-        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ddns-go/
-        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ddns-go feeds/packages/net/ddns-go/
-        rm -rf cdn.jsdelivr.net
-        find feeds/packages/net/ddns-go -name index.html -exec rm {} \;    
-
-        rm -rf feeds/packages/net/frp
-        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/frp/
-        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/frp feeds/packages/net/frp/
-        rm -rf cdn.jsdelivr.net
-        find feeds/packages/net/frp -name index.html -exec rm {} \; 
-
-        wget "https://www.dropbox.com/scl/fi/uccikbibj772c4sekzbk7/luci-app-turboacc.zip?rlkey=yzhkk0lfzhrthn8hbl1qt8k5j&st=31820445&dl=1" -O luci-app-turboacc.zip
-        rm -rf feeds/luci/applications/luci-app-turboacc
-        unzip luci-app-turboacc.zip -d feeds/luci/applications/
-        rm -rf luci-app-turboacc.zip
-
-        mkdir dl
-        wget "https://www.dropbox.com/scl/fi/9ts30p2csnlb9imaf8k68/backports-20210222-5.4-qsdk-11.5.0.5.tar.xz?rlkey=sntbyfjgg86gu2uoocgb9ggp1&st=7w81hl56&dl=1" -O dl/backports-20210222-5.4-qsdk-11.5.0.5.tar.xz
-        wget "https://www.dropbox.com/scl/fi/gu7ge6jmefn72ttuop1zs/linux-5.4-qsdk-11.5.0.5.tar.xz?rlkey=tdpq0ye35x290frbh7i8uqrm8&st=jjvegqrr&dl=1" -O dl/linux-5.4-qsdk-11.5.0.5.tar.xz
-
+       
     - name: Load Custom Configuration(加载自定义配置)
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
 
-        cp -rf other/immortalwrt_21.02/* $OPENWRT_PATH/
 
     - name: Download DL Package(下载DL软件包)
       run: |
