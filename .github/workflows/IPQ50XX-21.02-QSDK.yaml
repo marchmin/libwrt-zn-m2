@@ -2,8 +2,7 @@ name: IPQ50XX-21.02-QSDK
 
 on:
   workflow_dispatch:
-  schedule:
-    #- cron: 0 19 * * *
+
 
 env:
   REPO_URL: https://github.com/marchmin/immortalwrt-ipq50xx
