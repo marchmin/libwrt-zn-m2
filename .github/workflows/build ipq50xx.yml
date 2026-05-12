@@ -7,7 +7,7 @@ on:
 env:
   REPO_URL: https://github.com/marchmin/openwrt-redmi-ax3000
   REPO_BRANCH: ipq50xx-qsdk-kernel-4.4-openwrt-21.02-qsdk-11.4.0.5.7418
-  FEEDS_CONF: feeds/xxx.txt
+  FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: configs/ipq50xx-4.4.config
   DIY_SCRIPT: diy-script.sh
   CACHE_TOOLCHAIN: false
