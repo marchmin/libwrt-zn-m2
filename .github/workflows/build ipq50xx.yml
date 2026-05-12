@@ -1,19 +1,19 @@
-name: IPQ50XX-21.02-QSDK
+name: IPQ50XX-4.4-QSDK
 
 on:
   workflow_dispatch:
 
 
 env:
-  REPO_URL: https://github.com/marchmin/immortalwrt-ipq50xx
-  REPO_BRANCH: openwrt-21.02
+  REPO_URL: https://github.com/marchmin/openwrt-redmi-ax3000
+  REPO_BRANCH: ipq50xx-qsdk-kernel-4.4-openwrt-21.02-qsdk-11.4.0.5.7418
   FEEDS_CONF: feeds/xxx.txt
-  CONFIG_FILE: configs/ipq50xx-qsdk-21.02.config
+  CONFIG_FILE: configs/ipq50xx-4.4.config
   DIY_SCRIPT: diy-script.sh
   CACHE_TOOLCHAIN: false
   UPLOAD_BIN_DIR: false
   FIRMWARE_RELEASE: true
-  FIRMWARE_TAG: IPQ50XX-21.02-QSDK
+  FIRMWARE_TAG: IPQ50XX-4.4-QSDK
   TZ: Asia/Shanghai
 
 jobs:
